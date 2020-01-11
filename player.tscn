@@ -60,4 +60,4 @@ smoothing_speed = 6.0
 
 [node name="pistol" parent="." instance=ExtResource( 3 )]
 offset = Vector2( 5, 0 )
-fire_rate = 0.15
+fire_rate = 0.5
