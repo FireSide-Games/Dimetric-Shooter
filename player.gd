@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	self.time_since_fired += delta
 	# TODO: Hard-coded as semi-auto. Make a weapon interface with "is_automatic" property.
 	if Input.is_action_just_pressed("fire"):
-		try_fire(delta)
+		try_fire()
 	
 	set_player_animation(velocity)
 	
@@ -45,7 +45,7 @@ func handle_movement_input() -> Vector2:
 		# If moving at an octal direction (e.g. up AND left), scale movement to match the hypothenal speed.
 		return velocity / SQRT_2
 
-func try_fire(delta: float) -> void:
+func try_fire() -> void:
 	if $pistol.fire(self.time_since_fired):
 		self.time_since_fired = 0.0
 
