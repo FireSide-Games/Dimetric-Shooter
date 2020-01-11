@@ -62,5 +62,6 @@ func rotate_weapon_to_cursor() -> void:
 	
 	# Flip the gun animation if it's facing left (in radians).
 	var should_flip: bool = angle_to_cursor >=  HALF_PI || angle_to_cursor < -HALF_PI
-	$body.flip_h = should_flip
-	$pistol.flip_v = should_flip
+	#$body.flip_h = should_flip
+	$body.scale = Vector2(-1 if should_flip else 1, 1)
+	$pistol.scale = Vector2(1, -1 if should_flip else 1)
