@@ -2,6 +2,7 @@ extends Sprite
 class_name Gun
 
 export var fire_rate: float = 1.0
+export var is_automatic: bool = false
 
 # Attempts to fire the gun.
 # @param {float} seconds_since_fired 
