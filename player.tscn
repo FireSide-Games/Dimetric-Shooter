@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/woman.png" type="Texture" id=2]
-[ext_resource path="res://pistol.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/pistol/pistol.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -59,7 +59,7 @@ anims/run = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.3, 0.3 )
+zoom = Vector2( 0.2, 0.2 )
 smoothing_speed = 6.0
 
 [node name="pistol" parent="." instance=ExtResource( 3 )]

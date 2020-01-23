@@ -28,16 +28,16 @@ func handle_movement_input() -> Vector2:
 	var velocity: Vector2 = Vector2(0, 0)
 
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= speed
+		velocity.x -= self.speed
 
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += speed
+		velocity.x += self.speed
 
 	if Input.is_action_pressed("ui_up"):
-		velocity.y -= speed
+		velocity.y -= self.speed
 
 	if Input.is_action_pressed("ui_down"):
-		velocity.y += speed
+		velocity.y += self.speed
 
 	if velocity.x == 0 || velocity.y == 0:
 		return velocity

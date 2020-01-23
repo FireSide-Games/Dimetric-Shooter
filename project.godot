@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://gun.gd"
+"path": "res://weapons/gun.gd"
 } ]
 _global_script_class_icons={
 "Gun": ""
@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="Dimetric-Shooter"
 run/main_scene="res://world1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [input]
 
@@ -59,6 +63,14 @@ fire={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Local Player"
+2d_physics/layer_2="Landscape"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Player Projectiles"
+2d_physics/layer_5="Enemy Projectiles"
 
 [rendering]
 
