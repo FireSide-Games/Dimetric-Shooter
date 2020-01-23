@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dimetric-Shooter"
-run/main_scene="res://player.tscn"
+run/main_scene="res://world1.tscn"
 config/icon="res://icon.png"
 
 [input]
