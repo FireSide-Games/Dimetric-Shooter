@@ -49,15 +49,15 @@ func update_firing_state(delta: float) -> void:
 	self.time_since_fired += delta
 	# If we try to fire before we are able to, but it is within a certain threshold (queue_fire_threshold),
 	# we will queue up the shot to be fired as soon as the gun allows.
-	if queued_shot || $pistol.is_automatic && Input.is_action_pressed("fire") || Input.is_action_just_pressed("fire"):
+	if queued_shot || $flamethrower.is_automatic && Input.is_action_pressed("fire") || Input.is_action_just_pressed("fire"):
 		if try_fire():
 			queued_shot = false
-		elif $pistol.fire_rate - self.time_since_fired <= self.queue_fire_threshold:
+		elif $flamethrower.fire_rate - self.time_since_fired <= self.queue_fire_threshold:
 			queued_shot = true
 
 # @returns If the gun fired.
 func try_fire() -> bool:
-	if $pistol.fire(self.time_since_fired):
+	if $flamethrower.fire(self.time_since_fired):
 		self.time_since_fired = 0.0
 		return true
 	return false
@@ -70,11 +70,11 @@ func set_player_animation(velocity: Vector2) -> void:
 
 func rotate_weapon_to_cursor() -> void:
 	var mouse_loc: Vector2 = get_global_mouse_position()
-	var angle_to_cursor: float = mouse_loc.angle_to_point(self.position)
-	$pistol.rotation = angle_to_cursor
+	var angle_to_cursor: float = mouse_loc.angle_to_point(self.position + $flamethrower.position)
+	$flamethrower.rotation = angle_to_cursor
 	
 	# Flip the gun animation if it's facing left (in radians).
 	var should_flip: bool = angle_to_cursor >=  HALF_PI || angle_to_cursor < -HALF_PI
 	#$body.flip_h = should_flip
 	$body.scale = Vector2(-1 if should_flip else 1, 1)
-	$pistol.scale = Vector2(1, -1 if should_flip else 1)
+	$flamethrower.scale = Vector2(1, -1 if should_flip else 1)
