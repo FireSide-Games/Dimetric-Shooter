@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/elon-crust.png" type="Texture" id=2]
-[ext_resource path="res://weapons/flamethrower/flamethrower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/rifle/rifle.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -67,5 +67,6 @@ shape = SubResource( 3 )
 
 [node name="gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -8 )
-offset = Vector2( 12, 0 )
-flame_offset = 12.0
+offset = Vector2( 10, 0 )
+fire_rate = 0.15
+queue_fire_threshold = 0.05
