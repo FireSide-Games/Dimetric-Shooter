@@ -9,10 +9,11 @@
     - Reload times
     - RPGs remote detonation
     - Overheating
-- Waves of zombies attack you while fixing car
+    - Collect gun parts/schematics for better guns
+- Waves of robots attack you while fixing car
 
 ## Theme
-- Zombie Apocalypse
+- AI Robot takeover
 
 ## Environment
 - Urban 
@@ -21,3 +22,4 @@
 ## Goals:
 - Collect parts
 - Fix Car
+- Escape
