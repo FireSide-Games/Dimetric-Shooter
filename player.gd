@@ -12,7 +12,7 @@ var velocity: Vector2
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Velocity is reset after each game tick (no drifting/acceleration)
-	self.velocity = handle_movement_input()
+	self.velocity = _handle_movement_input()
 	
 	if event.is_action_pressed("pick-up"):
 		var item: GroundItem = _get_nearby_item()
@@ -44,29 +44,29 @@ func _physics_process(delta: float) -> void:
 	rotate_weapon_to_cursor()
 	move_and_slide(self.velocity)
 
-func handle_movement_input() -> Vector2:
-	var velocity: Vector2 = Vector2(0, 0)
+func _handle_movement_input() -> Vector2:
+	var vel: Vector2 = Vector2(0, 0)
 
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= self.speed
+		vel.x -= self.speed
 
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += self.speed
+		vel.x += self.speed
 
 	if Input.is_action_pressed("ui_up"):
-		velocity.y -= self.speed
+		vel.y -= self.speed
 
 	if Input.is_action_pressed("ui_down"):
-		velocity.y += self.speed
+		vel.y += self.speed
 
-	if velocity.x == 0 || velocity.y == 0:
-		return velocity
+	if vel.x == 0 || vel.y == 0:
+		return vel
 	else:
 		# If moving at an octal direction (e.g. up AND left), scale movement to match the hypothenal speed.
-		return velocity / SQRT_2
+		return vel / SQRT_2
 
-func set_player_animation(velocity: Vector2) -> void:
-	if velocity.x == 0 && velocity.y == 0:
+func set_player_animation(vel: Vector2) -> void:
+	if vel.x == 0 && vel.y == 0:
 		$body/AnimationPlayer.play("idle")
 	else:
 		$body/AnimationPlayer.play("run")
