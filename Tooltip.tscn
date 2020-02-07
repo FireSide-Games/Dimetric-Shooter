@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/kenny_pixel.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Tooltip" type="Node2D"]
+z_index = 4096
+
+[node name="Label" type="Label" parent="."]
+margin_right = 24.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/line_spacing = -2
+custom_constants/shadow_offset_y = 1
+text = "Test
+E"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

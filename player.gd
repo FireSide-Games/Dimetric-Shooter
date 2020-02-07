@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 # Constants
 const SQRT_2: float = sqrt(2)

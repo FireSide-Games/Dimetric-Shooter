@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "GroundItem",
+"language": "GDScript",
+"path": "res://grounditem.gd"
+}, {
+"base": "GroundItem",
+"class": "GroundWeapon",
+"language": "GDScript",
+"path": "res://ground_weapon.gd"
+}, {
 "base": "Sprite",
 "class": "Gun",
 "language": "GDScript",
 "path": "res://weapons/gun.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://player.gd"
 } ]
 _global_script_class_icons={
-"Gun": ""
+"GroundItem": "",
+"GroundWeapon": "",
+"Gun": "",
+"Player": ""
 }
 
 [application]
@@ -63,6 +81,11 @@ fire={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+pick-up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -71,6 +94,7 @@ fire={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Player Projectiles"
 2d_physics/layer_5="Enemy Projectiles"
+2d_physics/layer_6="Ground Items"
 
 [rendering]
 
