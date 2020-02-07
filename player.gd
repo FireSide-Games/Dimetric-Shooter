@@ -8,13 +8,41 @@ const HALF_PI: float = PI * 0.5
 # Exported variables
 export var speed: float = 50.0
 
-func _physics_process(delta: float) -> void:
+var velocity: Vector2
+
+func _unhandled_input(event: InputEvent) -> void:
 	# Velocity is reset after each game tick (no drifting/acceleration)
-	var velocity: Vector2 = handle_movement_input()
-	set_player_animation(velocity)
+	self.velocity = handle_movement_input()
+	
+	if event.is_action_pressed("pick-up"):
+		var item: GroundItem = _get_nearby_item()
+		if item != null:
+			_try_pickup_item(item)
+
+func _get_nearby_item() -> GroundItem:
+	var colliding_areas: Array = $"grounditem-intersection".get_overlapping_areas()
+	var num_colliding_areas: int = colliding_areas.size()
+	if num_colliding_areas > 0:
+		var area: Area2D = colliding_areas[num_colliding_areas - 1]
+		if area is GroundItem:
+			return area as GroundItem
+	return null
+
+func _try_pickup_item(item: GroundItem) -> void:
+	print("trying to pick up - it's so heavy!")
+
+func _on_area_entered(obj: Area2D):
+	if obj is GroundItem:
+		obj.show_tooltip(true)
+		
+func _on_area_exited(obj: Area2D):
+	if obj is GroundItem:
+		obj.show_tooltip(false)
+
+func _physics_process(delta: float) -> void:
+	set_player_animation(self.velocity)
 	rotate_weapon_to_cursor()
-	# move_and_slide automatically multiplies velocity by `delta`.
-	move_and_slide(velocity)
+	move_and_slide(self.velocity)
 
 func handle_movement_input() -> Vector2:
 	var velocity: Vector2 = Vector2(0, 0)
@@ -50,6 +78,5 @@ func rotate_weapon_to_cursor() -> void:
 	
 	# Flip the gun animation if it's facing left (in radians).
 	var should_flip: bool = angle_to_cursor >=  HALF_PI || angle_to_cursor < -HALF_PI
-	#$body.flip_h = should_flip
 	$body.scale = Vector2(-1 if should_flip else 1, 1)
 	$gun.scale = Vector2(1, -1 if should_flip else 1)

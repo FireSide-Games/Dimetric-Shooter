@@ -8,9 +8,6 @@ var tooltip = preload("res://Tooltip.tscn").instance()
 var label = self.tooltip.get_node("Label")
 
 func _ready():
-	self.connect("body_entered", self, "_on_body_entered")
-	self.connect("body_exited", self, "_on_body_exited")
-	
 	# Configure tooltip object.
 	self.add_child(self.tooltip)
 	var tooltip_size: Vector2 = self.label.get_global_rect().size
@@ -24,10 +21,5 @@ func _ready():
 	self.label.text = self.display_name + "\n" + key
 	self.tooltip.visible = false
 
-func _on_body_entered(body: PhysicsBody2D):
-	if body is Player:
-		self.tooltip.visible = true
-		
-func _on_body_exited(body: PhysicsBody2D):
-	if body is Player:
-		self.tooltip.visible = false
+func show_tooltip(visible: bool) -> void:
+	self.tooltip.visible = visible

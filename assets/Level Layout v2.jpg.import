@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Level Layout v2.jpg-4f767365f7dbc7097f3ed8ef6a9cd5a3.stex"
+path="res://.import/Level Layout v2.jpg-7c9583d303764dbe80d6167f4e0dafe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level Layout v2.jpg"
-dest_files=[ "res://.import/Level Layout v2.jpg-4f767365f7dbc7097f3ed8ef6a9cd5a3.stex" ]
+source_file="res://assets/Level Layout v2.jpg"
+dest_files=[ "res://.import/Level Layout v2.jpg-7c9583d303764dbe80d6167f4e0dafe6.stex" ]
 
 [params]
 
