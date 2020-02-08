@@ -46,6 +46,7 @@ func _try_pickup_item(item: Item) -> void:
 		_try_equip_weapon(item)
 	else:
 		self._inventory.add_item(item)
+		Global.MainScene.remove_child(item)
 
 func _try_equip_weapon(weapon: Gun) -> void:
 	# Position needs to be cached because it is changed during reparenting.
