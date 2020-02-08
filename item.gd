@@ -1,12 +1,18 @@
 extends Area2D
-class_name GroundItem
+class_name Item
 
 export var display_name: String
+export var description: String
 export var label_offset: Vector2 = Vector2(0, -24)
 
 var tooltip = preload("res://Tooltip.tscn").instance()
 var label = self.tooltip.get_node("Label")
+onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
+onready var audio = $AudioStreamPlayer2D
 
+var is_on_ground: bool = true
+	
 func _ready():
 	# Configure tooltip object.
 	self.add_child(self.tooltip)
@@ -23,3 +29,4 @@ func _ready():
 
 func show_tooltip(visible: bool) -> void:
 	self.tooltip.visible = visible
+

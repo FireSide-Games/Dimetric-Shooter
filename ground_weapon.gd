@@ -1,2 +1,0 @@
-extends GroundItem
-class_name GroundWeapon

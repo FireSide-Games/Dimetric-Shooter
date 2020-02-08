@@ -1,4 +1,4 @@
-extends Sprite
+extends Item
 class_name Gun
 
 # Exported variables
@@ -7,17 +7,11 @@ export var projectile_speed: float = 150.0
 export var fire_rate: float = 1.0
 export var is_automatic: bool = false
 export var queue_fire_threshold: float = 0.2
+export var barrel_position: Vector2 = Vector2(0, 0)
 
 var time_since_fired: float = 0.0
 var queued_shot: bool = false
-var sprite_half_width: float
 var is_auto_firing: bool = false
-
-func _ready():
-	self.sprite_half_width = self.texture.get_size().x * self.scale.x * 0.5 / self.hframes
-
-func _physics_process(delta: float) -> void:
-	update_firing_state(delta)
 
 func update_firing_state(delta: float) -> void:
 	self.time_since_fired += delta
@@ -48,8 +42,8 @@ func fire(seconds_since_fired: float) -> bool:
 	if can_fire:
 		self.time_since_fired = 0.0
 		self.is_auto_firing = self.is_automatic
-		$AnimationPlayer.play("fire")
-		$AnimationPlayer.queue("idle")
+		self.animation_player.play("fire")
+		self.animation_player.queue("idle")
 		_spawn_projectile()
 	return can_fire
 
@@ -57,18 +51,22 @@ func stop_firing() -> void:
 	self.is_auto_firing = false
 
 func _spawn_projectile() -> void:
+	var rotation: float = self.sprite.rotation
 	var projectile_instance = projectile_scene.instance()
-	projectile_instance.rotation = self.rotation
+	projectile_instance.rotation = rotation
 	var projectile_sprite: Sprite = projectile_instance.get_node("Sprite")
 	var projectile_sprite_half_width: float = projectile_sprite.texture.get_size().x / projectile_sprite.hframes * 0.5
-	var full_offset: Vector2 = self.offset + Vector2(self.sprite_half_width + projectile_sprite_half_width, 0)
-	projectile_instance.global_position = self.global_position + full_offset.rotated(self.rotation)
-	var direction: Vector2 = Vector2(cos(self.rotation), sin(self.rotation))
+	
+	var direction: Vector2 = Vector2(cos(rotation), sin(rotation))
+	var y_offset: float = self.barrel_position.y if direction.x > 0 else -self.barrel_position.y
+	var full_offset: Vector2 = Vector2(projectile_sprite_half_width + self.barrel_position.x, y_offset)
+	projectile_instance.global_position = self.global_position + full_offset.rotated(rotation)
+	
 	var velocity: Vector2 = direction * self.projectile_speed
 	projectile_instance.linear_velocity = velocity
+	
 	Global.MainScene.add_child(projectile_instance)
 
-func _on_AnimationPlayer_animation_started(anim_name):
+func _on_animation_started(anim_name):
 	if anim_name == "fire":
-		$AudioStreamPlayer2D.play()
-
+		self.audio.play()

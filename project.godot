@@ -9,30 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
-"class": "GroundItem",
-"language": "GDScript",
-"path": "res://grounditem.gd"
-}, {
-"base": "GroundItem",
-"class": "GroundWeapon",
-"language": "GDScript",
-"path": "res://ground_weapon.gd"
-}, {
-"base": "Sprite",
+"base": "Item",
 "class": "Gun",
 "language": "GDScript",
 "path": "res://weapons/gun.gd"
 }, {
+"base": "Node",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://inventory.gd"
+}, {
+"base": "Area2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://item.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://player.gd"
+"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
-"GroundItem": "",
-"GroundWeapon": "",
 "Gun": "",
+"Inventory": "",
+"Item": "",
 "Player": ""
 }
 

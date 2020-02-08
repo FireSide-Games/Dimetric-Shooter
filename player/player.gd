@@ -8,41 +8,57 @@ const HALF_PI: float = PI * 0.5
 # Exported variables
 export var speed: float = 50.0
 
-var velocity: Vector2
+onready var _gun: Gun = $gun
+var _velocity: Vector2
+var _inventory: Inventory = Inventory.new()
+
+func _ready():
+	self._gun.is_on_ground = false
+	self._gun.animation_player.play("idle")
+
+func _physics_process(delta: float) -> void:
+	_set_player_animation(self._velocity)
+	_rotate_weapon_to_cursor()
+	self._gun.update_firing_state(delta)
+	move_and_slide(self._velocity)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Velocity is reset after each game tick (no drifting/acceleration)
-	self.velocity = _handle_movement_input()
+	self._velocity = _handle_movement_input()
 	
 	if event.is_action_pressed("pick-up"):
-		var item: GroundItem = _get_nearby_item()
-		if item != null:
+		var item: Item = _get_nearby_item()
+		if item != null && item.is_on_ground:
 			_try_pickup_item(item)
 
-func _get_nearby_item() -> GroundItem:
-	var colliding_areas: Array = $"grounditem-intersection".get_overlapping_areas()
+func _get_nearby_item() -> Item:
+	var colliding_areas: Array = $"item-intersection".get_overlapping_areas()
 	var num_colliding_areas: int = colliding_areas.size()
 	if num_colliding_areas > 0:
-		var area: Area2D = colliding_areas[num_colliding_areas - 1]
-		if area is GroundItem:
-			return area as GroundItem
+		var area: Area2D = colliding_areas[-1]
+		if area is Item:
+			return area as Item
 	return null
 
-func _try_pickup_item(item: GroundItem) -> void:
-	print("trying to pick up - it's so heavy!")
+func _try_pickup_item(item: Item) -> void:
+	if item is Gun:
+		_try_equip_weapon(item)
+	else:
+		self._inventory.add_item(item)
+
+func _try_equip_weapon(weapon: Gun) -> void:
+	print("TODO")
+	# Here we can set self._gun to `weapon`
+	# We will need to manage the state of both guns
+	# and possibly place the current self._gun onto the ground.
 
 func _on_area_entered(obj: Area2D):
-	if obj is GroundItem:
+	if obj is Item && obj.is_on_ground:
 		obj.show_tooltip(true)
 		
 func _on_area_exited(obj: Area2D):
-	if obj is GroundItem:
+	if obj is Item && obj.is_on_ground:
 		obj.show_tooltip(false)
-
-func _physics_process(delta: float) -> void:
-	set_player_animation(self.velocity)
-	rotate_weapon_to_cursor()
-	move_and_slide(self.velocity)
 
 func _handle_movement_input() -> Vector2:
 	var vel: Vector2 = Vector2(0, 0)
@@ -65,18 +81,18 @@ func _handle_movement_input() -> Vector2:
 		# If moving at an octal direction (e.g. up AND left), scale movement to match the hypothenal speed.
 		return vel / SQRT_2
 
-func set_player_animation(vel: Vector2) -> void:
+func _set_player_animation(vel: Vector2) -> void:
 	if vel.x == 0 && vel.y == 0:
 		$body/AnimationPlayer.play("idle")
 	else:
 		$body/AnimationPlayer.play("run")
 
-func rotate_weapon_to_cursor() -> void:
+func _rotate_weapon_to_cursor() -> void:
 	var mouse_loc: Vector2 = get_global_mouse_position()
-	var angle_to_cursor: float = mouse_loc.angle_to_point(self.position + $gun.position)
-	$gun.rotation = angle_to_cursor
+	var angle_to_cursor: float = mouse_loc.angle_to_point(self.position + self._gun.sprite.position)
+	self._gun.sprite.rotation = angle_to_cursor
 	
 	# Flip the gun animation if it's facing left (in radians).
 	var should_flip: bool = angle_to_cursor >=  HALF_PI || angle_to_cursor < -HALF_PI
 	$body.scale = Vector2(-1 if should_flip else 1, 1)
-	$gun.scale = Vector2(1, -1 if should_flip else 1)
+	self._gun.sprite.scale = Vector2(1, -1 if should_flip else 1)

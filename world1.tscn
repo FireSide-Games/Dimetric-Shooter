@@ -2,9 +2,9 @@
 
 [ext_resource path="res://world1.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/tiles/city.png" type="Texture" id=2]
-[ext_resource path="res://player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemies/irachnid.tscn" type="PackedScene" id=4]
-[ext_resource path="res://weapons/pistol/ground_pistol.tscn" type="PackedScene" id=5]
+[ext_resource path="res://weapons/pistol/pistol.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -2826,12 +2826,10 @@ format = 1
 tile_data = PoolIntArray( 196613, 1, 0, 196618, 2, 0, 393217, 0, 0, 458769, 3, 0 )
 
 [node name="player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 104.995, 54.0233 )
-collision_mask = 34
-speed = 75.0
+position = Vector2( 108.224, 54.9026 )
 
 [node name="irachnid" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 232.57, 87.1198 )
 
-[node name="ground_pistol" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 127.586, 53.7125 )
+[node name="pistol" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 131.234, 37.9471 )
