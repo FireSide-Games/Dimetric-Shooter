@@ -41,7 +41,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 14, 0 ) ]
+"values": [ Vector2( 10, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:frame")
@@ -50,14 +50,25 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 0 ]
 }
 
 [node name="gun" instance=ExtResource( 1 )]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+offset = Vector2( 10, 0 )
+hframes = 1
+region_enabled = false
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/fire = SubResource( 1 )
+
+[node name="shadow" parent="." index="4"]
+visible = false
+scale = Vector2( 0.761319, 0.303815 )

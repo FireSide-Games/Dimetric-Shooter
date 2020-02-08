@@ -33,6 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _get_nearby_item() -> Item:
 	var colliding_areas: Array = $"item-intersection".get_overlapping_areas()
+	colliding_areas.erase(self._gun)
 	var num_colliding_areas: int = colliding_areas.size()
 	if num_colliding_areas > 0:
 		var area: Area2D = colliding_areas[-1]
@@ -47,10 +48,26 @@ func _try_pickup_item(item: Item) -> void:
 		self._inventory.add_item(item)
 
 func _try_equip_weapon(weapon: Gun) -> void:
-	print("TODO")
-	# Here we can set self._gun to `weapon`
-	# We will need to manage the state of both guns
-	# and possibly place the current self._gun onto the ground.
+	# Swap weapons.
+	self.remove_child(self._gun)
+	Global.MainScene.remove_child(weapon)
+	Global.MainScene.add_child(self._gun)
+	self.add_child(weapon)
+	
+	var temp = self._gun
+	self._gun = weapon
+	self._gun.position = temp.position
+	self._gun.is_on_ground = false
+	self._gun.tooltip.visible = false
+	self._gun.animation_player.play("idle")
+	
+	weapon = temp
+	weapon.is_on_ground = true
+	weapon.animation_player.play("float")
+	weapon.sprite.rotation = 0
+	weapon.sprite.scale = Vector2(1, 1)
+	weapon.position = self.position
+	weapon.tooltip.visible = true
 
 func _on_area_entered(obj: Area2D):
 	if obj is Item && obj.is_on_ground:

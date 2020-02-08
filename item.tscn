@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/images/guns/Pistol_1-sheet.png" type="Texture" id=1]
 [ext_resource path="res://item.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/sounds/gunshot3.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/images/shadow.png" type="Texture" id=4]
@@ -128,9 +127,9 @@ extents = Vector2( 5.42981, 7.23745 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-offset = Vector2( 14, 0 )
+offset = Vector2( 0, -8 )
 hframes = 3
+region_enabled = true
 region_rect = Rect2( 0, 0, 36, 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -147,7 +146,6 @@ position = Vector2( 0, -5 )
 shape = SubResource( 3 )
 
 [node name="shadow" type="Sprite" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0.392157 )
 show_behind_parent = true
 scale = Vector2( 1, 0.4 )

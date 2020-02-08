@@ -1,4 +1,4 @@
 extends Node2D
 
 func _ready():
-	Global.MainScene = self
+	Global.MainScene = $YSort
