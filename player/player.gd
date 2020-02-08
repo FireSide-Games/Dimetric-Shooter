@@ -48,12 +48,16 @@ func _try_pickup_item(item: Item) -> void:
 		self._inventory.add_item(item)
 
 func _try_equip_weapon(weapon: Gun) -> void:
-	# Swap weapons.
+	# Position needs to be cached because it is changed during reparenting.
+	var weapon_found_location: Vector2 = weapon.position
+	
+	# Swap weapon ownership (reparenting)
 	self.remove_child(self._gun)
 	Global.MainScene.remove_child(weapon)
 	Global.MainScene.add_child(self._gun)
 	self.add_child(weapon)
 	
+	# Update weapon states to reflect new ownership.
 	var temp = self._gun
 	self._gun = weapon
 	self._gun.position = temp.position
@@ -66,7 +70,7 @@ func _try_equip_weapon(weapon: Gun) -> void:
 	weapon.animation_player.play("float")
 	weapon.sprite.rotation = 0
 	weapon.sprite.scale = Vector2(1, 1)
-	weapon.position = self.position
+	weapon.position = weapon_found_location
 	weapon.tooltip.visible = true
 
 func _on_area_entered(obj: Area2D):
