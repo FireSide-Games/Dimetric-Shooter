@@ -12,5 +12,4 @@ barrel_position = Vector2( 14, 0 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
-offset = Vector2( 10, 0 )
 region_rect = Rect2( 0, 0, 15, 9 )
