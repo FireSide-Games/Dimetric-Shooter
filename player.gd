@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+# Signal the sidekick should come to the player
+signal WHISTLE
+
 # Constants
 const SQRT_2: float = sqrt(2)
 const HALF_PI: float = PI * 0.5
@@ -14,6 +17,10 @@ func _physics_process(delta: float) -> void:
 	rotate_weapon_to_cursor()
 	# move_and_slide automatically multiplies velocity by `delta`.
 	move_and_slide(velocity)
+	
+	# If pressing space, whistle
+	if Input.is_action_just_pressed("ui_accept"):
+		emit_signal("WHISTLE")
 
 func handle_movement_input() -> Vector2:
 	var velocity: Vector2 = Vector2(0, 0)
