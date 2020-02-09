@@ -12,7 +12,6 @@ barrel_position = Vector2( 10, -2 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
-offset = Vector2( 10, 0 )
 hframes = 3
 
 [node name="shadow" parent="." index="4"]

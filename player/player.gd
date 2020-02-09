@@ -7,6 +7,8 @@ const HALF_PI: float = PI * 0.5
 
 # Exported variables
 export var speed: float = 50.0
+export var max_health: float = 100
+var _health: float = self.max_health
 
 onready var _gun: Gun = $gun
 var _velocity: Vector2
@@ -30,6 +32,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		var item: Item = _get_nearby_item()
 		if item != null && item.is_on_ground:
 			_try_pickup_item(item)
+
+func take_damage(damage: float) -> void:
+	self._health = max(0, self._health - damage)
+	if self._health <= 0:
+		self.die()
+
+# Invoked when health reaches zero.
+func die() -> void:
+	# TODO: Determine what happens upon death.
+	print("Oh no, you died!")
 
 func _get_nearby_item() -> Item:
 	var colliding_areas: Array = $"item-intersection".get_overlapping_areas()
