@@ -11,6 +11,7 @@ export var max_health: float = 100
 var _health: float = self.max_health
 
 onready var _gun: Gun = $gun
+var _secondary_gun: Gun = null
 var _velocity: Vector2
 var _inventory: Inventory = Inventory.new()
 
@@ -32,6 +33,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var item: Item = _get_nearby_item()
 		if item != null && item.is_on_ground:
 			_try_pickup_item(item)
+	elif event.is_action_pressed("swap-weapons"):
+		self._swap_weapons()
 
 func take_damage(damage: float) -> void:
 	self._health = max(0, self._health - damage)
@@ -46,6 +49,7 @@ func die() -> void:
 func _get_nearby_item() -> Item:
 	var colliding_areas: Array = $"item-intersection".get_overlapping_areas()
 	colliding_areas.erase(self._gun)
+	colliding_areas.erase(self._secondary_gun)
 	var num_colliding_areas: int = colliding_areas.size()
 	if num_colliding_areas > 0:
 		var area: Area2D = colliding_areas[-1]
@@ -61,6 +65,19 @@ func _try_pickup_item(item: Item) -> void:
 		Global.MainScene.remove_child(item)
 
 func _try_equip_weapon(weapon: Gun) -> void:
+	if self._secondary_gun != null:
+		self._drop_swap_weapon(weapon)
+	else:
+		self._pickup_weapon(weapon)
+
+func _pickup_weapon(weapon: Gun) -> void:
+	Global.MainScene.remove_child(weapon)
+	self._secondary_gun = weapon
+	self._secondary_gun.label.visible = false
+	self.add_child(self._secondary_gun)
+	self._swap_weapons()
+
+func _drop_swap_weapon(weapon: Gun) -> void:
 	# Position needs to be cached because it is changed during reparenting.
 	var weapon_found_location: Vector2 = weapon.position
 	
@@ -72,19 +89,33 @@ func _try_equip_weapon(weapon: Gun) -> void:
 	
 	# Update weapon states to reflect new ownership.
 	var temp = self._gun
-	self._gun = weapon
 	self._gun.position = temp.position
 	self._gun.is_on_ground = false
-	self._gun.tooltip.visible = false
-	self._gun.animation_player.play("idle")
 	
-	weapon = temp
 	weapon.is_on_ground = true
 	weapon.animation_player.play("float")
 	weapon.sprite.rotation = 0
 	weapon.sprite.scale = Vector2(1, 1)
 	weapon.position = weapon_found_location
 	weapon.tooltip.visible = true
+	
+	self._swap_weapons()
+
+func _swap_weapons() -> void:
+	if self._secondary_gun == null:
+		return
+		
+	var temp = self._gun
+	self._gun = self._secondary_gun
+	self._gun.visible = true
+	self._gun.position = temp.position
+	self._gun.animation_player.play("idle")
+	
+	self._secondary_gun = temp
+	self._secondary_gun.animation_player.play("idle")
+	self._secondary_gun.visible = false
+	self._secondary_gun.sprite.rotation = 0
+	self._secondary_gun.sprite.scale = Vector2(1, 1)
 
 func _on_area_entered(obj: Area2D):
 	if obj is Item && obj.is_on_ground:

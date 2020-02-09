@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://Tooltip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://item.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/sounds/gunshot3.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/images/shadow.png" type="Texture" id=4]
@@ -150,6 +151,10 @@ shape = SubResource( 3 )
 [node name="shadow" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.392157 )
 show_behind_parent = true
-scale = Vector2( 0.4, 0.16 )
+scale = Vector2( 1, 0.4 )
 texture = ExtResource( 4 )
+
+[node name="Tooltip" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 0, -40 )
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_started"]

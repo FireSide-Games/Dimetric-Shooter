@@ -13,17 +13,17 @@ barrel_position = Vector2( 10, -1 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
-offset = Vector2( 10, 0 )
 hframes = 3
-region_enabled = false
 region_rect = Rect2( 0, 0, 20, 3 )
 
 [node name="AudioStreamPlayer2D" parent="." index="2"]
 pitch_scale = 1.2
 
 [node name="shadow" parent="." index="4"]
-visible = false
 scale = Vector2( 0.461661, 0.180341 )
 
 [node name="outline" parent="." index="5"]
 texture = ExtResource( 3 )
+
+[node name="Tooltip" parent="." index="6"]
+position = Vector2( 0, 0 )
