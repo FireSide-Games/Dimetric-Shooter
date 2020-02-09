@@ -129,8 +129,9 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-offset = Vector2( 10, 0 )
+offset = Vector2( 0, -8 )
 hframes = 3
+region_enabled = true
 region_rect = Rect2( 0, 0, 36, 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -147,9 +148,8 @@ position = Vector2( 0, -5 )
 shape = SubResource( 3 )
 
 [node name="shadow" type="Sprite" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0.392157 )
 show_behind_parent = true
-scale = Vector2( 1, 0.4 )
+scale = Vector2( 0.4, 0.16 )
 texture = ExtResource( 4 )
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_started"]

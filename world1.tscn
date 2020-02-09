@@ -2826,7 +2826,7 @@ format = 1
 tile_data = PoolIntArray( 196613, 1, 0, 196618, 2, 0, 393217, 0, 0, 458769, 3, 0 )
 
 [node name="player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 108.224, 54.9026 )
+position = Vector2( 102.635, 57.6973 )
 collision_mask = 2
 
 [node name="irachnid" parent="YSort" instance=ExtResource( 4 )]
