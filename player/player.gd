@@ -10,6 +10,7 @@ export var speed: float = 50.0
 export var max_health: float = 100
 var _health: float = self.max_health
 
+onready var _hud: HUD = $Camera2D/HUD
 onready var _gun: Gun = $gun
 var _secondary_gun: Gun = null
 var _velocity: Vector2

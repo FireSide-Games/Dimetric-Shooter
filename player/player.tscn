@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/elon-crust.png" type="Texture" id=2]
 [ext_resource path="res://weapons/pistol/pistol.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -62,6 +63,11 @@ anims/run = SubResource( 2 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
 smoothing_speed = 6.0
+
+[node name="HUD" parent="Camera2D" instance=ExtResource( 4 )]
+offset = Vector2( 10, 10 )
+scale = Vector2( 4, 4 )
+transform = Transform2D( 4, 0, 0, 4, 10, 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
