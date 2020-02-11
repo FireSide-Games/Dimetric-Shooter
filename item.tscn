@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -8 ), Vector2( 0, -12 ), Vector2( 0, -10 ), Vector2( 0, -8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("shadow:scale")
+tracks/1/path = NodePath("Shadow:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,7 +34,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 0.4 ), Vector2( 0.33, 0.13 ), Vector2( 0.67, 0.26 ), Vector2( 1, 0.4 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("shadow:visible")
+tracks/2/path = NodePath("Shadow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -73,7 +73,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("shadow:visible")
+tracks/0/path = NodePath("Shadow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -148,7 +148,7 @@ visible = false
 position = Vector2( 0, -5 )
 shape = SubResource( 3 )
 
-[node name="shadow" type="Sprite" parent="."]
+[node name="Shadow" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.392157 )
 show_behind_parent = true
 scale = Vector2( 1, 0.4 )

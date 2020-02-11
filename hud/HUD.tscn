@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://hud/HealthBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://hud/Weapon Slot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hud/Car Part Slot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://hud/HUD.gd" type="Script" id=4]
+[ext_resource path="res://assets/images/weapons/pistol/pistol-outline.png" type="Texture" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 4 )
@@ -14,9 +15,15 @@ script = ExtResource( 4 )
 position = Vector2( 0, 19 )
 frame = 1
 
+[node name="Outline" type="Sprite" parent="Weapon Slot 1"]
+texture = ExtResource( 5 )
+offset = Vector2( 12, 9 )
+
 [node name="Weapon Slot 2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 25, 19 )
-scale = Vector2( 1, 1 )
+
+[node name="Outline" type="Sprite" parent="Weapon Slot 2"]
+offset = Vector2( 12, 9 )
 
 [node name="Car Part Slot" parent="." instance=ExtResource( 3 )]
 position = Vector2( 61, 9 )

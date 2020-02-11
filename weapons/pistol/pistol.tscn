@@ -19,10 +19,7 @@ region_rect = Rect2( 0, 0, 20, 3 )
 [node name="AudioStreamPlayer2D" parent="." index="2"]
 pitch_scale = 1.2
 
-[node name="shadow" parent="." index="4"]
-scale = Vector2( 0.461661, 0.180341 )
-
-[node name="outline" parent="." index="5"]
+[node name="Outline" parent="." index="5"]
 texture = ExtResource( 3 )
 
 [node name="Tooltip" parent="." index="6"]

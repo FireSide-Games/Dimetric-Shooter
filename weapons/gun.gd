@@ -9,6 +9,8 @@ export var is_automatic: bool = false
 export var queue_fire_threshold: float = 0.2
 export var barrel_position: Vector2 = Vector2(0, 0)
 
+onready var outline_texture: Texture = $Outline.texture
+
 var time_since_fired: float = 0.0
 var queued_shot: bool = false
 var is_auto_firing: bool = false

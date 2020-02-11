@@ -8,9 +8,8 @@ const HALF_PI: float = PI * 0.5
 # Exported variables
 export var speed: float = 50.0
 export var max_health: float = 100
-var _health: float = self.max_health
+var _health: int = self.max_health
 
-onready var _hud: HUD = Global.HUD
 onready var _gun: Gun = $gun
 var _secondary_gun: Gun = null
 var _velocity: Vector2
@@ -37,8 +36,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("swap-weapons"):
 		self._swap_weapons()
 
-func take_damage(damage: float) -> void:
+func take_damage(damage: int) -> void:
 	self._health = max(0, self._health - damage)
+	Global.HUD.set_health(self._health)
 	if self._health <= 0:
 		self.die()
 
@@ -75,6 +75,7 @@ func _pickup_weapon(weapon: Gun) -> void:
 	Global.MainScene.remove_child(weapon)
 	self._secondary_gun = weapon
 	self._secondary_gun.label.visible = false
+	Global.HUD.set_weapon_2_texture(self._secondary_gun.outline_texture)
 	self.add_child(self._secondary_gun)
 	self._swap_weapons()
 
@@ -117,6 +118,8 @@ func _swap_weapons() -> void:
 	self._secondary_gun.visible = false
 	self._secondary_gun.sprite.rotation = 0
 	self._secondary_gun.sprite.scale = Vector2(1, 1)
+	
+	Global.HUD.swap_weapon_highlight()
 
 func _on_area_entered(obj: Area2D):
 	if obj is Item && obj.is_on_ground:
