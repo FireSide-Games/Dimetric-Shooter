@@ -66,6 +66,3 @@ region_enabled = false
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/fire = SubResource( 1 )
-
-[node name="Outline" type="Sprite" parent="." index="5"]
-visible = false

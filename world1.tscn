@@ -2833,3 +2833,5 @@ position = Vector2( 232.57, 87.1198 )
 
 [node name="rifle" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 135.713, 38.7376 )
+collision_layer = 32
+collision_mask = 0

@@ -10,6 +10,7 @@ onready var label = $Tooltip/Label
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var audio = $AudioStreamPlayer2D
+onready var outline_texture: Texture = $Outline.texture
 
 var is_on_ground: bool = true
 	

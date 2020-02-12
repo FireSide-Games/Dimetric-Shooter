@@ -157,4 +157,10 @@ texture = ExtResource( 4 )
 [node name="Tooltip" parent="." instance=ExtResource( 1 )]
 visible = false
 position = Vector2( 0, -40 )
+
+[node name="Outline" type="Sprite" parent="."]
+visible = false
+__meta__ = {
+"_editor_description_": ""
+}
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_started"]
